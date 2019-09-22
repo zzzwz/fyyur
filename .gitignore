@@ -1,8 +1,14 @@
-
-env
-
+# dependencies
 .vscode
 
-__pycache__
-
+# logs
 error.log
+
+# Environment files
+env
+
+
+#envrionment file
+*.env
+
+__pycache__/
