@@ -7,6 +7,8 @@ error.log
 # Environment files
 env
 
+# migration files
+migrations
 
 #envrionment file
 *.env
