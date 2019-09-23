@@ -48,8 +48,11 @@ class Venue(db.Model):
     # added fields
     website = db.Column(db.String(200))
     genres = db.Column(db.ARRAY(db.String(120)))
-    seeking_talent = db.Column(db.Boolean)
+    seeking_talent = db.Column(db.Boolean, nullable=False)
     seeking_description = db.Column(db.String(1000))
+
+    # foreign relationship
+    shows = db.relationship('Show', backref='venue')
 
 
   
@@ -69,11 +72,24 @@ class Artist(db.Model):
     # TODO: implement any missing fields, as a database migration using Flask-Migrate - checked
 
     # added fields
-    seeking_venue = db.Column(db.Boolean)
+    seeking_venue = db.Column(db.Boolean, nullable=False)
     seeking_description = db.Column(db.String(1000))
+
+    #foreign relationship
+    shows = db.relationship('Show', backref='artist')
     
 
-# TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
+# TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration. - checked
+
+class Show(db.Model):
+  __tablename__ = 'Show'
+
+  id = db.Column(db.Integer, primary_key=True)
+  start_time = db.Column(db.DateTime)
+  
+  venue_id = db.Column(db.Integer, db.ForeignKey('Venue.id'), nullable=False)
+  artist_id = db.Column(db.Integer, db.ForeignKey('Artist.id'), nullable=False)
+
 
 
 
